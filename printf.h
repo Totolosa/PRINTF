@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:19:12 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/09 18:54:00 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/10 16:23:53 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_info_resolution
 {
 	char flags;
 	int width;
-	char prec;
+	int prec;
 	char type;
 	int printed;
 	int i;
