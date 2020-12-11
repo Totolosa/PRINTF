@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 11:42:32 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/10 18:32:47 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 23:19:46 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,29 @@ void reconize_type(t_info_resolution *t, char c)
 // 		va_arg(arg, int);
 // }
 
-// void	reinitialize_table(t_info_resolution *table)
-// {
-// 	table->flags = 0;
-// 	table->width = 0;
-// 	table->prec = 0;
-// 	table->type = '\0';
-// 	printf("table->type = %c\n", table->type);
-// }
+void	reinitialize_table(t_info_resolution *table)
+{
+	table->flags = 0;
+	table->width = 0;
+	table->prec = 0;
+	table->type = 0;
+//	printf("table->type = %c\n", table->type);
+}
 
 void	reconize_flags(t_info_resolution *t, const char *s)
 {
-	if (s[t->i] == '-')
-		t->flags = '-';
 	if (s[t->i] == '0')
+	{
 		t->flags = '0';
-	if (s[t->i] == '0' || s[t->i] == '-')
 		t->i++;
+	}
+	if (s[t->i] == '-')
+	{
+		t->flags = '-';
+		t->i++;
+	if (s[t->i] == '0')
+		t->i++;
+	}
 }
 
 void	reconize_width(t_info_resolution *t, const char *s)
@@ -144,40 +150,72 @@ void	print_noargs(t_info_resolution *t, const char *s)
 	}
 }
 
+// void	*print_arg(va_list arg, t_info_resolution t)
+// {
+// 	char argc;
+// 	char *argstr;
+// 	void *argp;
+// 	unsigned int argunsint;
+// 	int argint;
+
+// 	if (t->type == 'c')
+// 		return (argc = va_arg(arg, char));
+// 	if (t->type == 's')
+// 		va_arg(arg, char*);
+// 	if (t->type == 'p')
+// 		va_arg(arg, void*);
+// 	if (t->type == 'u' || t->type == 'x' || t->type == 'X')
+// 		va_arg(arg, unsigned int);
+// 	if (t->type == 'd' || t->type == 'i')
+// 		va_arg(arg, int);
+// }
+
 int ft_printf(const char *format, ...)
 {
 	t_info_resolution table;
-//	va_list arg;
+	va_list arg;
 
-//	va_start(args, format);
+	va_start(arg, format);
 //	t_info_resolution table = {0, 0, 0, 0, 0, 0};
 //	printf("format apres initialisation dans struct = %s", table.format);
 	while (format[(table.i)])
 	{
 		print_noargs(&table, format);
-		reconize_table(&table, format);
-		if (table-> == '%')
-			print_percent(table);
-		asign_type_to_arg(arg, table);
-		print_arg(arg, table);
-		printf("flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.flags, table.width, table.prec, table.type, table.printed, table.i, format[table.i - 1]);
-		/* PRINT AVEC FLAGS*/
+		if (format[table.i])
+		{
+			reconize_table(&table, format);
+		//	printf("\nAVANT PRINT_ARGS : flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.flags, table.width, table.prec, table.type, table.printed, table.i, format[table.i - 1]);
+			print_arg(&table, arg);
+			reinitialize_table(&table);
+		}
+		// if (table-> == '%')
+		// 	print_percent(table);
+	//	printf("flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.flags, table.width, table.prec, table.type, table.printed, table.i, format[table.i - 1]);
 
-	//	reinitialize_table(&table);
-	//	printf("flags =  || width =  || prec =  || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.type, table.printed, table.i, format[table.i - 1]);
+
+	//	printf("flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.flags, table.width, table.prec, table.type, table.printed, table.i, format[table.i - 1]);
 	}
-//	va_end(arg);
+	va_end(arg);
 	return(table.printed);
 }
 
 int main()
 {
-	int a = 100;
-	int b = 5;
+	int a = 12345;
+	int b = -10;
 	int c = 3;
-//	int d;
+	char *str1 = "Aller";
+	char *str2 = "le statde";
+	char z = 'A';
+
+	char *str = "Test char A : %0*.100c\n";
+
 	setbuf(stdout, NULL);
-	ft_printf("%%\n%c%s%p%d%i%u%x%X%9%");
-//	printf("Bibli : %-*%", a, b);
+	int retmoi = ft_printf(str, b, z);
+	int retbibli = printf(str, b, z);
+	printf("retour moi = %d\n", retmoi);
+	printf("retour bibli = %d\n", retbibli);
+//	printf("Bibli : %0010.12d\n", a);
+//	printf("Bibli : %0-10.s\n", str1);
 	return(0);
 }
