@@ -6,11 +6,11 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 11:42:32 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/11 23:19:46 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 22:58:24 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void reconize_type(t_info_resolution *t, char c)
 {
@@ -74,13 +74,15 @@ void	reconize_flags(t_info_resolution *t, const char *s)
 		t->flags = '0';
 		t->i++;
 	}
-	if (s[t->i] == '-')
+	else if (s[t->i] == '-')
 	{
 		t->flags = '-';
 		t->i++;
-	if (s[t->i] == '0')
-		t->i++;
 	}
+	else
+		t->flags = '1';
+	while (s[t->i] == '0')
+			t->i++;
 }
 
 void	reconize_width(t_info_resolution *t, const char *s)
@@ -115,13 +117,15 @@ void	reconize_precision(t_info_resolution *t, const char *s)
 			precision = precision * 10 + s[t->i++] - '0';
 		t->prec = precision;
 	}
+	else 
+		t->prec = -2;
 }
 
 void	reconize_table(t_info_resolution *t, const char *s)
 {
 //	printf("format[i] avant reconize_flags = %c\n", s[t->i]);
 	reconize_flags(t, s);
-//	printf("format[i] avant reconize_width = %c\n", s[t->i]);
+//	printf("format[i] avant reconize_width = %c, format[i+1] = %c\n", s[t->i], s[t->i+1]);
 	reconize_width(t, s);
 //	printf("format[i] avant reconize_precision = %c\n", s[t->i]);
 	reconize_precision(t, s);
@@ -185,7 +189,8 @@ int ft_printf(const char *format, ...)
 		{
 			reconize_table(&table, format);
 		//	printf("\nAVANT PRINT_ARGS : flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d || format[i - 1] = %c\n", table.flags, table.width, table.prec, table.type, table.printed, table.i, format[table.i - 1]);
-			print_arg(&table, arg);
+			if ((print_arg(&table, arg)) == 0)
+				return (-1);
 			reinitialize_table(&table);
 		}
 		// if (table-> == '%')
@@ -199,23 +204,3 @@ int ft_printf(const char *format, ...)
 	return(table.printed);
 }
 
-int main()
-{
-	int a = 12345;
-	int b = -10;
-	int c = 3;
-	char *str1 = "Aller";
-	char *str2 = "le statde";
-	char z = 'A';
-
-	char *str = "Test char A : %0*.100c\n";
-
-	setbuf(stdout, NULL);
-	int retmoi = ft_printf(str, b, z);
-	int retbibli = printf(str, b, z);
-	printf("retour moi = %d\n", retmoi);
-	printf("retour bibli = %d\n", retbibli);
-//	printf("Bibli : %0010.12d\n", a);
-//	printf("Bibli : %0-10.s\n", str1);
-	return(0);
-}
