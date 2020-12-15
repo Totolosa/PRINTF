@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:28:00 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/14 22:51:36 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 18:11:57 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,18 @@ void	ft_putstr_printf(char *s, t_info_resolution *table)
 		write(1, &s[i], 1);
 		table->printed++;
 	}
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = 0;
+		i++;
+	}
+	(void)s;
 }
 

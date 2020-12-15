@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:19:12 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/14 22:49:53 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 19:33:23 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,21 @@ int		print_arg(t_info_resolution *t, va_list arg);
 void	print_width_before(t_info_resolution *t, int len_arg);
 void	print_width_after(t_info_resolution *t, int len_arg);
 
-void	check_width_int(t_info_resolution *t, int *c, va_list arg);
-void	check_width_str(t_info_resolution *t, char **s, va_list arg);
+void	check_width(t_info_resolution *t, va_list arg);
+// void	check_width_str(t_info_resolution *t, char **s, va_list arg);
+// void	check_width_int(t_info_resolution *t, int *c, va_list arg);
 
-void	check_precision_str(t_info_resolution *t, char **s, va_list arg);
+void	check_precision(t_info_resolution *t, va_list arg);
+// void	check_precision_str(t_info_resolution *t, char **s, va_list arg);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 void	ft_putstr_printf(char *s, t_info_resolution *table);
+void	ft_bzero(void *s, size_t n);
 
 void	print_char(t_info_resolution *t, va_list arg);
+
+void	print_percent(t_info_resolution *t, va_list arg);
 
 void	print_str(t_info_resolution *t, va_list arg);
 

@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:39:58 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/14 23:35:24 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/15 19:13:22 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ void		print_str(t_info_resolution *t, va_list arg)
 {
 	char	*str;
 
+	check_width(t, arg);
+//	check_width_str(t, &str, arg);
+	check_precision(t, arg);
+//	check_precision_str(t, &str, arg);
 	str = (char*)va_arg(arg, char*);
-	check_width_str(t, &str, arg);
-	check_precision_str(t, &str, arg);
 	print_width_before(t, len_str_with_precision(t, str));
 	print_str_with_precision(t, str);
 	print_width_after(t, len_str_with_precision(t, str));

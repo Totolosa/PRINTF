@@ -1,9 +1,10 @@
 NAME		= libftprintf.a
 
-SRCS		= 	printf.c\
+SRCS		= 	ft_printf.c\
 				print_arg.c\
 				print_char.c\
 				print_str.c\
+				print_percent.c\
 				check_width.c\
 				check_precision.c\
 				basic_fonctions.c\
