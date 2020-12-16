@@ -1,9 +1,11 @@
 NAME		= libftprintf.a
 
 SRCS		= 	ft_printf.c\
-				print_arg.c\
+				reconize_table.c\
+				print_other_than_arg.c\
 				print_char.c\
 				print_str.c\
+				print_int.c\
 				print_percent.c\
 				check_width.c\
 				check_precision.c\

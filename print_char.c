@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:32:41 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/15 19:13:05 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/16 14:03:10 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	print_char(t_info_resolution *t, va_list arg)
 	print_width_before(t, 1);
 	write(1, &c, 1);
 	t->printed++;
+//	printf("\nprinted = %d\n", t->printed);
 	print_width_after(t, 1);
 }
