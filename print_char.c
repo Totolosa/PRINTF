@@ -6,13 +6,13 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:32:41 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/16 14:03:10 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_char(t_info_resolution *t, va_list arg)
+void	print_char(arg_info *t, va_list arg)
 {
 	int c;
 	

@@ -1,18 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_int.c                                        :+:      :+:    :+:   */
+/*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/16 10:35:37 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/17 17:05:24 by tdayde           ###   ########lyon.fr   */
+/*   Created: 2020/12/17 16:25:06 by tdayde            #+#    #+#             */
+/*   Updated: 2020/12/17 16:32:43 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int nbr_of_digit(arg_info *t, long long nbr)
+void	ft_putnbr_base_printf_ptr(unsigned long long nbr, char *base, arg_info *t)
+{
+	unsigned long long len_base;
+	char tmp;
+	
+	tmp = 0;
+	len_base = ft_strlen(base);
+		if (nbr >= 0 && nbr < len_base)
+		{
+			if (t->type == 'x' || t-> type == 'p'
+								|| (t->type == 'X' && nbr < 10))
+				write(1, &base[nbr], 1);
+			if (t->type == 'X' && nbr >= 10)
+			{
+				tmp = base[nbr] - 32;
+				write(1, &tmp, 1);
+			}
+			t->printed++;
+		}
+		if (nbr >= len_base)
+		{
+			ft_putnbr_base_printf(nbr / len_base, base, t);
+			ft_putnbr_base_printf(nbr % len_base, base, t);
+		}
+}
+
+int nbr_of_digit(arg_info *t, unsigned long long nbr)
 {
 	int nbr_of_digit;
 	int base;
@@ -33,7 +59,7 @@ int nbr_of_digit(arg_info *t, long long nbr)
 	return(nbr_of_digit);
 }
 
-int nbr_of_digit_with_precision(arg_info *t,long long nbr)
+int nbr_of_digit_with_precision(arg_info *t, unsigned long long nbr)
 {
 	int res;
 
@@ -57,7 +83,6 @@ void	print_int_with_precision(arg_info *t, long long nbr, int n)
 	tmp = t->prec;
 	if (t->prec == 0 && nbr == 0)
 		return ;
-//	printf("\nnbr = %lld\n", nbr);
 	if (nbr < 0 && t->prec != -2)
 	{
 		write(1, "-", 1);
@@ -79,24 +104,12 @@ void	print_int_with_precision(arg_info *t, long long nbr, int n)
 		ft_putnbr_base_printf(nbr, "0123456789abcdef", t);
 }
 
-void	print_int(arg_info *t, va_list arg)
+void	print_ptr(arg_info *t, va_list arg)
 {
-	long long	nbr;
+	unsigned long long	nbr;
 	
-	check_width(t, arg);
-//	check_width_str(t, &str, arg);
-//	if (t->type != 'p')
-	check_precision(t, arg);
-//	printf("\nflags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d\n", t->flags, t->width, t->prec, t->type, t->printed, t->i);
-//	check_precision_str(t, &str, arg);
-	if (t->type == 'd' || t->type == 'i')
-		if ((nbr = (int)va_arg(arg, int)) < 0)
-			t->neg = 1;
-	if (t->type == 'u' || t->type == 'x' || t->type == 'X')
-		nbr = (unsigned int)va_arg(arg, unsigned int);
-	if (t->type == 'p')
-		nbr = (unsigned long int)va_arg(arg, unsigned long int);
-//	printf("\nnbr = %lld\n", nbr);
+	nbr = (unsigned long long)va_arg(arg, unsigned long long);
+	printf("\nnbr = %llu\n", nbr);
 	// if (t->type == 'p' || t->type == 'c')
 	// 	t->prec = 0;
 	print_width_before(t, nbr_of_digit_with_precision(t, nbr));

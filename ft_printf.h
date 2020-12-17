@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:19:12 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/16 19:29:03 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 16:31:19 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,35 @@ typedef struct	s_info_resolution
 	int neg;
 	int printed;
 	int i;
-}				t_info_resolution;
+}				arg_info;
 
 int		ft_printf(const char *format, ...) __attribute__ ((format (printf, 1, 2)));
-int		print_arg(t_info_resolution *t, va_list arg);
+int		print_arg(arg_info *t, va_list arg);
 
-void	reconize_table(t_info_resolution *t, const char *s);
+void	reconize_table(arg_info *t, const char *s);
 
-void	print_noargs(t_info_resolution *t, const char *s);
-void	print_width_before(t_info_resolution *t, int len_arg);
-void	print_width_after(t_info_resolution *t, int len_arg);
+void	print_noargs(arg_info *t, const char *s);
+void	print_width_before(arg_info *t, int len_arg);
+void	print_width_after(arg_info *t, int len_arg);
 
-void	check_width(t_info_resolution *t, va_list arg);
-// void	check_width_str(t_info_resolution *t, char **s, va_list arg);
-// void	check_width_int(t_info_resolution *t, int *c, va_list arg);
+void	check_width(arg_info *t, va_list arg);
+// void	check_width_str(arg_info *t, char **s, va_list arg);
+// void	check_width_int(arg_info *t, int *c, va_list arg);
 
-void	check_precision(t_info_resolution *t, va_list arg);
-// void	check_precision_str(t_info_resolution *t, char **s, va_list arg);
+void	check_precision(arg_info *t, va_list arg);
+// void	check_precision_str(arg_info *t, char **s, va_list arg);
 
 size_t	ft_strlen(const char *s);
-void	ft_putstr_printf(char *s, t_info_resolution *table);
+void	ft_putstr_printf(char *s, arg_info *table);
 void	ft_bzero(void *s, size_t n);
-void	ft_putnbr_fd_printf(long long n, int fd, t_info_resolution *t);
-void	ft_putnbr_base(long long nbr, char *base, t_info_resolution *t);
+void	ft_putnbr_fd_printf(long long n, int fd, arg_info *t);
+void	ft_putnbr_base_printf(long long nbr, char *base, arg_info *t);
+void	ft_putnbr_base_printf_ptr(unsigned long long nbr, char *base, arg_info *t);
 
-void	print_char(t_info_resolution *t, va_list arg);
-void	print_str(t_info_resolution *t, va_list arg);
-void	print_percent(t_info_resolution *t, va_list arg);
-void	print_int(t_info_resolution *t, va_list arg);
+void	print_char(arg_info *t, va_list arg);
+void	print_str(arg_info *t, va_list arg);
+void	print_percent(arg_info *t, va_list arg);
+void	print_int(arg_info *t, va_list arg);
+void	print_ptr(arg_info *t, va_list arg);
 
 #endif

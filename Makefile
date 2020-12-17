@@ -6,6 +6,7 @@ SRCS		= 	ft_printf.c\
 				print_char.c\
 				print_str.c\
 				print_int.c\
+				print_ptr.c\
 				print_percent.c\
 				check_width.c\
 				check_precision.c\

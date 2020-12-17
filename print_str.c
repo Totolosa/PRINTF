@@ -6,13 +6,13 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:39:58 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/15 19:13:22 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	len_str_with_precision(t_info_resolution *t, char* str)
+static int	len_str_with_precision(arg_info *t, char* str)
 {
 	int len_str;
 
@@ -28,7 +28,7 @@ static int	len_str_with_precision(t_info_resolution *t, char* str)
 		return (t->prec);
 }
 
-static void	print_str_with_precision(t_info_resolution *t, char *str)
+static void	print_str_with_precision(arg_info *t, char *str)
 {
 	int i;
 
@@ -50,7 +50,7 @@ static void	print_str_with_precision(t_info_resolution *t, char *str)
 	}
 }
 
-void		print_str(t_info_resolution *t, va_list arg)
+void		print_str(arg_info *t, va_list arg)
 {
 	char	*str;
 

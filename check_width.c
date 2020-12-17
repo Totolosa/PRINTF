@@ -6,13 +6,13 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 22:03:22 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/15 19:17:37 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	check_width(t_info_resolution *t, va_list arg)
+void	check_width(arg_info *t, va_list arg)
 {
 	if (t->width == -1)
 	{
@@ -25,7 +25,7 @@ void	check_width(t_info_resolution *t, va_list arg)
 	}
 }
 
-// void	check_width_int(t_info_resolution *t, int *c, va_list arg)
+// void	check_width_int(arg_info *t, int *c, va_list arg)
 // {
 // 	if (t->width == -1)
 // 	{
@@ -40,7 +40,7 @@ void	check_width(t_info_resolution *t, va_list arg)
 // 	}
 // }
 
-// void	check_width_str(t_info_resolution *t, char **s, va_list arg)
+// void	check_width_str(arg_info *t, char **s, va_list arg)
 // {
 // 	int next;
 

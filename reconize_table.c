@@ -6,13 +6,13 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 09:51:40 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/16 16:31:35 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	reconize_flags(t_info_resolution *t, const char *s)
+static void	reconize_flags(arg_info *t, const char *s)
 {
 	if (s[t->i] == '0' || s[t->i] == '-')
 	{
@@ -34,7 +34,7 @@ static void	reconize_flags(t_info_resolution *t, const char *s)
 			t->i++;
 }
 
-static void	reconize_width(t_info_resolution *t, const char *s)
+static void	reconize_width(arg_info *t, const char *s)
 {
 	int width;
 	
@@ -49,7 +49,7 @@ static void	reconize_width(t_info_resolution *t, const char *s)
 	t->width = width;
 }
 
-static void	reconize_precision(t_info_resolution *t, const char *s)
+static void	reconize_precision(arg_info *t, const char *s)
 {
 	int precision;
 
@@ -70,7 +70,7 @@ static void	reconize_precision(t_info_resolution *t, const char *s)
 		t->prec = -2;
 }
 
-static void	reconize_type(t_info_resolution *t, char c)
+static void	reconize_type(arg_info *t, char c)
 {
 	if (c == 'c')
 		t->type = 'c';
@@ -93,7 +93,7 @@ static void	reconize_type(t_info_resolution *t, char c)
 	t->i++;
 }
 
-void		reconize_table(t_info_resolution *t, const char *s)
+void		reconize_table(arg_info *t, const char *s)
 {
 //	printf("format[i] avant reconize_flags = %c\n", s[t->i]);
 	reconize_flags(t, s);

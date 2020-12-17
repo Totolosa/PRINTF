@@ -6,13 +6,13 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:14:34 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/16 16:38:25 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_width_before(t_info_resolution *t, int len_arg)
+void	print_width_before(arg_info *t, int len_arg)
 {
 	int i;
 	
@@ -40,7 +40,7 @@ void	print_width_before(t_info_resolution *t, int len_arg)
 	}
 }
 
-void	print_width_after(t_info_resolution *t, int len_arg)
+void	print_width_after(arg_info *t, int len_arg)
 {	
 	int i;
 
@@ -53,7 +53,7 @@ void	print_width_after(t_info_resolution *t, int len_arg)
 		}
 }
 
-void	print_noargs(t_info_resolution *t, const char *s)
+void	print_noargs(arg_info *t, const char *s)
 {
 	while (s[(t->i)] != '%' && s[(t->i)])
 	{
