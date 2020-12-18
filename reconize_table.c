@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 09:51:40 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 16:31:07 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	reconize_flags(arg_info *t, const char *s)
 	}
 	else
 		t->flags = '1';
-	while (s[t->i] == '0')
+	while (s[t->i] == '0' || s[t->i] == '-')
 			t->i++;
 }
 

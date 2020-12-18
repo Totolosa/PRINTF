@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 10:35:37 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/17 17:05:24 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 17:17:41 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int nbr_of_digit(arg_info *t, long long nbr)
 	int nbr_of_digit;
 	int base;
 
-	if (t->type == 'i' || t->type == 'd' || t->type == 'u')
+	if (t->type == 'i' || t->type == 'd' || t->type == 'u' || t->type == 'c')
 		base = 10;
 	if (t->type == 'x' || t->type == 'X' || t->type == 'p')
 		base = 16;
@@ -37,6 +37,8 @@ int nbr_of_digit_with_precision(arg_info *t,long long nbr)
 {
 	int res;
 
+	if (t->type == 'c')
+		return (1);
 	if (nbr == 0 && t->prec == 0)
 		return (0);
 	res = nbr_of_digit(t, nbr);
@@ -57,20 +59,19 @@ void	print_int_with_precision(arg_info *t, long long nbr, int n)
 	tmp = t->prec;
 	if (t->prec == 0 && nbr == 0)
 		return ;
-//	printf("\nnbr = %lld\n", nbr);
-	if (nbr < 0 && t->prec != -2)
+	if (t->neg == 1)
 	{
 		write(1, "-", 1);
 		t->printed++;
 	}
-	if (t->type == 'p')
-	{
-		write(1, "0x", 2);
-		t->printed +=2;
-	}
 	while (tmp-- > n)
 	{
 		write(1, "0", 1);
+		t->printed++;
+	}
+	if (t->type == 'c')
+	{
+		write(1, &nbr, 1);
 		t->printed++;
 	}
 	if (t->type == 'i' || t->type == 'd' || t->type == 'u')
@@ -89,13 +90,16 @@ void	print_int(arg_info *t, va_list arg)
 	check_precision(t, arg);
 //	printf("\nflags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d\n", t->flags, t->width, t->prec, t->type, t->printed, t->i);
 //	check_precision_str(t, &str, arg);
-	if (t->type == 'd' || t->type == 'i')
-		if ((nbr = (int)va_arg(arg, int)) < 0)
+	if (t->type == 'd' || t->type == 'i' || t->type == 'c')
+		if ((nbr = (int)va_arg(arg, int)) < 0 && t->type != 'c')
 			t->neg = 1;
 	if (t->type == 'u' || t->type == 'x' || t->type == 'X')
 		nbr = (unsigned int)va_arg(arg, unsigned int);
 	if (t->type == 'p')
-		nbr = (unsigned long int)va_arg(arg, unsigned long int);
+	{
+		print_ptr(t, arg);
+		return ;
+	}
 //	printf("\nnbr = %lld\n", nbr);
 	// if (t->type == 'p' || t->type == 'c')
 	// 	t->prec = 0;

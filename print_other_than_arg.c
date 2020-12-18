@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 19:14:34 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/17 12:13:26 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 14:34:40 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_width_before(arg_info *t, int len_arg)
 		if (t->neg == 1 && t->prec == -2)
 		{
 			write(1, "-", 1);
+			t->neg = 0;
 			t->printed++;
 		}
 		while (++i < t->width - len_arg)

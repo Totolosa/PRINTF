@@ -6,7 +6,7 @@
 /*   By: tdayde <tdayde@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 11:42:32 by tdayde            #+#    #+#             */
-/*   Updated: 2020/12/17 14:11:11 by tdayde           ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 17:04:11 by tdayde           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	reinitialize_table(arg_info *table)
 int		print_arg(arg_info *t, va_list arg)
 {
 	//printf("flags = %c || width = %d || prec = %d || type = %c || printed = %d || i = %d\n", t->flags, t->width, t->prec, t->type, t->printed, t->i);
-	if (t->type == 'c')
-		print_char(t, arg);
+	// if (t->type == 'c')
+	// 	print_char(t, arg);
 	if (t->type == 's')
 		print_str(t, arg);
 	if (t->type == 'd' || t->type == 'i' || t->type == 'u' ||
-			 t->type == 'x' || t->type == 'X' || t->type == 'p')
+			 t->type == 'x' || t->type == 'X' || t->type == 'p' || t->type == 'c')
 		print_int(t, arg);
 	// if (t->type == 'u' || t->type == 'x' || t->type == 'X')
 	// 	va_arg(arg, unsigned int);
